@@ -27,4 +27,3 @@ def Roll(perso,jet):
                     return -1
     res = eval(jet)
     return res
-print(Roll(152,"155+1d15+agi"))

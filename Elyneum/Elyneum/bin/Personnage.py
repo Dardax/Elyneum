@@ -1,118 +1,118 @@
 # encoding: utf-8
-import roll from Roll.py
+import Roll
 
 class Personnage(object):
 	
-	mForce = {
-		"nom_long" : "Force",
-		"nom_court" : "FOR"
-		"valeur" : "30+1d50"
-	}
-	mAgilite = {
-		"nom_long" : "Agilité",
-		"nom_court" : "AGI"
-		"valeur" : "30+1d50"
-	}
-	mIntelligence = {
-		"nom_long" : "Intelligence",
-		"nom_court" : "INT"
-		"valeur" : "30+1d50"
-	}
-	mCharisme = {
-		"nom_long" : "Charisme",
-		"nom_court" : "CHA"
-		"valeur" : "30+1d50"
-	}
-	mPerseption = {
-		"nom_long" : "Perseption",
-		"nom_court" : "PER"
-		"valeur" : "30+1d50"
-	}
-	mPoint_de_vie = {
-		"nom_long" : "Point de vie",
-		"nom_court" : "PV"
-		"valeur" : "FOR/3"
-	}
-	mPoint_de_mana = {
-		"nom_long" : "Point de mana",
-		"nom_court" : "PM"
-		"valeur" : "INT/10"
-	}
-	mEsquive = {
-		"nom_long" : "Esquive",
-		"nom_court" : "Esq"
-		"valeur" : "AGI/2"
-	}
-	mParade = {
-		"nom_long" : "Parade",
-		"nom_court" : "Par"
-		"valeur" : "AGI/10"
-	}
-	mArmure = {
-		"nom_long" : "Armure",
-		"nom_court" : "Arm"
-		"valeur" : ""
-	}
-	tab_carac = [mForce, mAgilite, mIntelligence, mCharisme, mPerseption, mPoint_de_vie, mPoint_de_mana, mEsquive, mParade, mArmure]
-	competances = []
-	sorts = []
-	equipements = []
-	inventaire = []
 	def __init__(self, Force, Agilite, Intelligence, Charisme, Perseption, Point_de_vie, Point_de_mana, Esquive, Parade, Armure):
+		self.mForce = {
+			"nom_long" : "Force",
+			"nom_court" : "FOR",
+			"valeur" : "30+1d50"
+		}
+		self.mAgilite = {
+			"nom_long" : "Agilité",
+			"nom_court" : "AGI",
+			"valeur" : "30+1d50"
+		}
+		self.mIntelligence = {
+			"nom_long" : "Intelligence",
+			"nom_court" : "INT",
+			"valeur" : "30+1d50"
+		}
+		self.mCharisme = {
+			"nom_long" : "Charisme",
+			"nom_court" : "CHA",
+			"valeur" : "30+1d50"
+		}
+		self.mPerseption = {
+			"nom_long" : "Perseption",
+			"nom_court" : "PER",
+			"valeur" : "30+1d50"
+		}
+		self.mPoint_de_vie = {
+			"nom_long" : "Point de vie",
+			"nom_court" : "PV",
+			"valeur" : "FOR/3"
+		}
+		self.mPoint_de_mana = {
+			"nom_long" : "Point de mana",
+			"nom_court" : "PM",
+			"valeur" : "INT/10"
+		}
+		self.mEsquive = {
+			"nom_long" : "Esquive",
+			"nom_court" : "Esq",
+			"valeur" : "AGI/2"
+		}
+		self.mParade = {
+			"nom_long" : "Parade",
+			"nom_court" : "Par",
+			"valeur" : "AGI/10"
+		}
+		self.mArmure = {
+			"nom_long" : "Armure",
+			"nom_court" : "Arm",
+			"valeur" : ""
+		}
+		tab_carac = [self.mForce, self.mAgilite, self.mIntelligence, self.mCharisme, self.mPerseption, self.mPoint_de_vie, self.mPoint_de_mana, self.mEsquive, self.mParade, self.mArmure]
+		self.competances = []
+		self.sorts = []
+		self.equipements = []
+		self.inventaire = []
 
 		if Force =="" : 
-			mForce["valeur"] = Roll(self, mForce["valeur"])
+			self.mForce["valeur"] = Roll.Roll(self, self.mForce["valeur"])
 		else:
-			mForce["valeur"] = Force
+			self.mForce["valeur"] = Force
 
 		if Agilite =="" : 
-			mAgilite["valeur"] = Roll(self, mAgilite["valeur"])
+			self.mAgilite["valeur"] = Roll.Roll(self, self.mAgilite["valeur"])
 		else:
-			mAgilite["valeur"] = Agilite
+			self.mAgilite["valeur"] = Agilite
 
 		if Intelligence =="" : 
-			mIntelligence["valeur"] = Roll(self, mIntelligence["valeur"])
+			self.mIntelligence["valeur"] = Roll.Roll(self, self.mIntelligence["valeur"])
 		else:
-			mIntelligence["valeur"] = Intelligence
+			self.mIntelligence["valeur"] = Intelligence
 
 		if Charisme =="" : 
-			mCharisme["valeur"] = Roll(self, mCharisme["valeur"])
+			self.mCharisme["valeur"] = Roll.Roll(self, self.mCharisme["valeur"])
 		else:
-			mCharisme["valeur"] = Charisme
+			self.mCharisme["valeur"] = Charisme
 
 		if Perseption =="" : 
-			mPerseption["valeur"] = Roll(self, mPerseption["valeur"])
+			self.mPerseption["valeur"] = Roll.Roll(self, self.mPerseption["valeur"])
 		else:
-			mPerseption["valeur"] = Perseption
+			self.mPerseption["valeur"] = Perseption
 
 		if Point_de_vie =="" : 
-			mPoint_de_vie["valeur"] = Roll(self, mPoint_de_vie["valeur"])
+			self.mPoint_de_vie["valeur"] = Roll.Roll(self, self.mPoint_de_vie["valeur"])
 		else:
-			mPoint_de_vie["valeur"] = Point_de_vie
+			self.mPoint_de_vie["valeur"] = Point_de_vie
 
 		if Point_de_mana =="" : 
-			mPoint_de_mana["valeur"] = Roll(self, mPoint_de_mana["valeur"])
+			self.mPoint_de_mana["valeur"] = Roll.Roll(self, self.mPoint_de_mana["valeur"])
 		else:
-			mPoint_de_mana["valeur"] = Point_de_mana
+			self.mPoint_de_mana["valeur"] = Point_de_mana
 
 		if Esquive =="" : 
-			mEsquive["valeur"] = Roll(self, mEsquive["valeur"])
+			self.mEsquive["valeur"] = Roll.Roll(self, self.mEsquive["valeur"])
 		else:
-			mEsquive["valeur"] = Esquive
+			self.mEsquive["valeur"] = Esquive
 
 		if Parade =="" : 
-			mParade["valeur"] = Roll(self, mParade["valeur"])
+			self.mParade["valeur"] = Roll.Roll(self, self.mParade["valeur"])
 		else:
-			mParade["valeur"] = Parade
+			self.mParade["valeur"] = Parade
 
 		if Armure =="" : 
-			mArmure["valeur"] = Roll(self, mArmure["valeur"])
+			self.mArmure["valeur"] = Roll.Roll(self, self.mArmure["valeur"])
 		else:
-			mArmure["valeur"] = Armure
+			self.mArmure["valeur"] = Armure
 
 	def modifier_value(self,nom_long,value):
 		for carac in tab_carac:
-			if carac["nom_long"]==nom_long: carac["valeur"] = value
+			if carac["nom_long"]==nom_long:  carac["valeur"] = value
 
 	def getCar(self): 
 		return tab_carac

@@ -1,2 +1,5 @@
+import Personnage
 
-import xml.etree.ElementTree as ET
+perso = Personnage.Personnage("","30","30","30","30","30","30","30","30","")
+
+print(perso.mForce["valeur"])

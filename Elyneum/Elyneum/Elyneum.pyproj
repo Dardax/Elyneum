@@ -5,8 +5,7 @@
     <ProjectGuid>b98339ab-74ab-45fc-a22a-bcc98713bae2</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>bin\Elyneum.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <SearchPath>bin</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Elyneum</Name>
