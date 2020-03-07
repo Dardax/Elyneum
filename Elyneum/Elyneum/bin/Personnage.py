@@ -54,7 +54,7 @@ class Personnage(object):
 			"nom_court" : "Arm",
 			"valeur" : ""
 		}
-		tab_carac = [self.mForce, self.mAgilite, self.mIntelligence, self.mCharisme, self.mPerseption, self.mPoint_de_vie, self.mPoint_de_mana, self.mEsquive, self.mParade, self.mArmure]
+		self.tab_carac = [self.mForce, self.mAgilite, self.mIntelligence, self.mCharisme, self.mPerseption, self.mPoint_de_vie, self.mPoint_de_mana, self.mEsquive, self.mParade, self.mArmure]
 		self.competances = []
 		self.sorts = []
 		self.equipements = []
@@ -111,32 +111,32 @@ class Personnage(object):
 			self.mArmure["valeur"] = Armure
 
 	def modifier_value(self,nom_long,value):
-		for carac in tab_carac:
+		for carac in self.tab_carac:
 			if carac["nom_long"]==nom_long:  carac["valeur"] = value
 
 	def getCar(self): 
-		return tab_carac
+		return self.tab_carac
 
 	def addSpell(self, sort): 
-		sorts.append(sort)
+		vsorts.append(sort)
 
 	def getSpell(self): 
-		return sorts
+		return self.sorts
 
 	def addComp(self, comp): 
-		competances.append(comp)
+		self.competances.append(comp)
 
 	def getComp(self): 
-		return competances
+		return self.competances
 
 	def addEquip(self, equi): 
-		equipements.append(equip)
+		self.equipements.append(equip)
 
 	def getEquip(self): 
-		return equipements
+		return self.equipements
 
 	def addInvent(self, invent): 
-		inventaire.append(invent)
+		self.inventaire.append(invent)
 
 	def getinvent(self): 
-		return inventaire
+		return self.inventaire

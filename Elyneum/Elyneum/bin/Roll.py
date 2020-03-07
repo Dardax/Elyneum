@@ -16,14 +16,18 @@ def Roll(perso,jet):
                 jet = jet.replace(number,str(val),1)
             else:
                 try:
-                    for cara in perso.getcar():
+                    tab =perso.getCar()
+                    for cara in tab:
                         if cara["nom_court"] == number:
                             try:
-                                val = int(cara["valeur"])
-                                jet = jet.replace(number,val.tostring(),1)
+                                val = cara["valeur"]
+                                jet = jet.replace(number,str(val),1)
                             except ValueError:
                                 return -1
                 except AttributeError:
-                    return -1
-    res = eval(jet)
+                    return -3
+    if jet != "":
+        res = int(eval(jet))
+    else:
+        res = jet
     return res

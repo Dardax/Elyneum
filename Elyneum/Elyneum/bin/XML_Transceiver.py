@@ -66,7 +66,7 @@ class XML_Transceiver(object):
         for car in carac_secon:
             ret = add_carac(car)
             line2 = line2 + ret
-        line2=line2 +"\n\t\ttab_carac = ["
+        line2=line2 +"\n\t\tself.tab_carac = ["
         isfirst = True
         for car in tab_carac:
             if not isfirst: line2 =line2 +", "
@@ -91,18 +91,18 @@ class XML_Transceiver(object):
             line = line + "\n\n\t\tif " + car[1:] +" ==\"\" : \n\t\t\t"+ "self." +car + "[\"valeur\"] = Roll.Roll(self, self."+car+"[\"valeur\"])"
             line = line + "\n\t\telse:\n\t\t\t" + "self."+car + "[\"valeur\"] = " + car[1:]
    
-        line = line + "\n\n\tdef modifier_value(self,nom_long,value):\n\t\tfor carac in tab_carac:\n\t\t\tif carac[\"nom_long\"]==nom_long: \
+        line = line + "\n\n\tdef modifier_value(self,nom_long,value):\n\t\tfor carac in self.tab_carac:\n\t\t\tif carac[\"nom_long\"]==nom_long: \
  carac[\"valeur\"] = value"
 
-        line = line + "\n\n\tdef getCar(self): \n\t\treturn tab_carac"
-        line = line + "\n\n\tdef addSpell(self, sort): \n\t\tsorts.append(sort)"
-        line = line + "\n\n\tdef getSpell(self): \n\t\treturn sorts"
-        line = line + "\n\n\tdef addComp(self, comp): \n\t\tcompetances.append(comp)"
-        line = line + "\n\n\tdef getComp(self): \n\t\treturn competances"
-        line = line + "\n\n\tdef addEquip(self, equi): \n\t\tequipements.append(equip)"
-        line = line + "\n\n\tdef getEquip(self): \n\t\treturn equipements"
-        line = line + "\n\n\tdef addInvent(self, invent): \n\t\tinventaire.append(invent)"
-        line = line + "\n\n\tdef getinvent(self): \n\t\treturn inventaire"
+        line = line + "\n\n\tdef getCar(self): \n\t\treturn self.tab_carac"
+        line = line + "\n\n\tdef addSpell(self, sort): \n\t\tvsorts.append(sort)"
+        line = line + "\n\n\tdef getSpell(self): \n\t\treturn self.sorts"
+        line = line + "\n\n\tdef addComp(self, comp): \n\t\tself.competances.append(comp)"
+        line = line + "\n\n\tdef getComp(self): \n\t\treturn self.competances"
+        line = line + "\n\n\tdef addEquip(self, equi): \n\t\tself.equipements.append(equip)"
+        line = line + "\n\n\tdef getEquip(self): \n\t\treturn self.equipements"
+        line = line + "\n\n\tdef addInvent(self, invent): \n\t\tself.inventaire.append(invent)"
+        line = line + "\n\n\tdef getinvent(self): \n\t\treturn self.inventaire"
         
         fichier.write(line)
         fichier.close()
