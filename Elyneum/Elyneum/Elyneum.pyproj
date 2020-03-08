@@ -33,10 +33,12 @@
     <Folder Include="Systeme\" />
     <Folder Include="Systeme\Algarne\" />
     <Folder Include="Systeme\Algarne\Collection\" />
+    <Folder Include="Systeme\Algarne\Collection\Personnage\" />
     <Folder Include="Systeme\Algarne\Sauvegarde\" />
+    <Folder Include="Systeme\Algarn\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Systeme\Algarne\Modele.xml" />
+    <Content Include="Systeme\Algarn\Modele.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

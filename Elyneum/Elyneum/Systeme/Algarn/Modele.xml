@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Algarn>
+	<Personnage nom="" race="" niveau="" age="">
+		<Carac_Principal nombre="5">
+			<Carac nom_long="Force" nom_court="FOR">30+1d50</Carac>
+			<Carac nom_long="Agilité" nom_court="AGI">30+1d50</Carac>
+			<Carac nom_long="Intelligence" nom_court="INT">30+1d50</Carac>
+			<Carac nom_long="Charisme" nom_court="CHA">30+1d50</Carac>
+			<Carac nom_long="Perseption" nom_court="PER">30+1d50</Carac>	
+		</Carac_Principal>
+    <Carac_Secondaire nombre="5">
+			<Carac nom_long="Point de vie" nom_court="PV">FOR/3</Carac>
+			<Carac nom_long="Point de mana" nom_court="PM">INT/10</Carac>
+			<Carac nom_long="Esquive" nom_court="Esq">AGI/2</Carac>
+			<Carac nom_long="Parade" nom_court="Par" >AGI/10</Carac>
+			<Carac nom_long="Armure" nom_court="Arm"></Carac>
+		</Carac_Secondaire>
+		<Competances>
+      <Competance nom=""></Competance>
+		</Competances>
+		<Sorts>
+      <Sort nom="" cout=""></Sort>
+		</Sorts>
+		<Equipements>
+		</Equipements>
+    <Inventaire>
+    </Inventaire>
+	</Personnage>
+	<Arme nom="" degat="" modificateur="" effet="" />
+	<Armure nom="" armure="" effet=""/>
+</Algarn>
