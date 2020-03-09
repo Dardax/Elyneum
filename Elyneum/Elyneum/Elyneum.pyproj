@@ -20,6 +20,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="bin\Transceiver.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bin\Collection.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bin\Combat.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="bin\Roll.py">
       <SubType>Code</SubType>
     </Compile>

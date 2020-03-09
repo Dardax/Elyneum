@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Personnage nom="Testes" race="" niveau="" age="">
 	<Carac_Principal>
-		<Carac nom_long="Force" nom_court="FOR">67</Carac>
-		<Carac nom_long="Agilité" nom_court="AGI">50</Carac>
-		<Carac nom_long="Intelligence" nom_court="INT">43</Carac>
-		<Carac nom_long="Charisme" nom_court="CHA">33</Carac>
-		<Carac nom_long="Perseption" nom_court="PER">80</Carac>
+		<Carac nom_long="Force" nom_court="FOR">74</Carac>
+		<Carac nom_long="Agilité" nom_court="AGI">75</Carac>
+		<Carac nom_long="Intelligence" nom_court="INT">79</Carac>
+		<Carac nom_long="Charisme" nom_court="CHA">79</Carac>
+		<Carac nom_long="Perseption" nom_court="PER">32</Carac>
 	</Carac_Principal>
 	<Carac_Secondaire>
-		<Carac nom_long="Point de vie" nom_court="PV">22</Carac>
-		<Carac nom_long="Point de mana" nom_court="PM">4</Carac>
-		<Carac nom_long="Esquive" nom_court="Esq">25</Carac>
-		<Carac nom_long="Parade" nom_court="Par">5</Carac>
+		<Carac nom_long="Point de vie" nom_court="PV">24</Carac>
+		<Carac nom_long="Point de mana" nom_court="PM">7</Carac>
+		<Carac nom_long="Esquive" nom_court="Esq">37</Carac>
+		<Carac nom_long="Parade" nom_court="Par">7</Carac>
 		<Carac nom_long="Armure" nom_court="Arm"></Carac>
 	</Carac_Secondaire>
 	<Competances>

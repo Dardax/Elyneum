@@ -1,7 +1,6 @@
 # encoding: utf-8
 import xml.etree.ElementTree as ET
 import os.path as op
-#import Roll
 
 ENTETE_PYTHON = "# encoding: utf-8\nimport Roll\n\nclass Personnage(object):\n\t"
 
@@ -12,6 +11,51 @@ class XML_Transceiver(object):
     def __init__(self):
         pass
 
+    def lire_personnage(self,path):
+
+        description =[]
+        retour=[]
+        competances =[]
+        sorts =[]
+        equip = []
+        inv =[]
+
+        tree = ET.parse(path)
+        personnage = tree.getroot()
+        carac_princ = personnage.find("Carac_Principal")
+        carac_secon = personnage.find("Carac_Secondaire")
+        competance = personnage.find("Competance")
+        sort = personnage.find("Sort")
+        equipement = personnage.find("Equipements")
+        inventaire = personnage.find("Inventaire")
+
+        for cara in carac_princ:
+            retour.append(cara.text)
+        for cara in carac_secon:
+            retour.append(cara.text)
+        for spell in sort:
+            sorts.append(spell.attrib["nom"])
+        for stuff in equipement:
+            equip.append(stuff.attrib["nom"])
+        for objet in inventaire:
+            inv.append(objet.attrib["nom"])
+
+        return desc, retour, competances, sorts, equip, inv
+
+    def lire_armure(self):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armures.xml"
+
+    def lire_arme(self):
+        pass
+
+    def lire_sort(self):
+        pass
+
+    def lire_competances(self):
+        pass
+    
+    def lire_objet(self):
+        pass
 
     def read_modele(self, path):
         """Methode de lecture du modele en vue de créer Personnage.py"""
@@ -53,8 +97,9 @@ class XML_Transceiver(object):
         carac_princ = personnage.find("Carac_Principal")
         nbCaracPrinc = carac_princ.attrib["nombre"]
         carac_secon = personnage.find("Carac_Secondaire")
-        competance = personnage.find("Competance")
-        sort = personnage.find("Sort")
+        competance = personnage.find("Competances")
+        sort = personnage.find("Sorts")
+        
        
         
         fichier  = open("Personnage.py","w", encoding='utf-8')
@@ -74,6 +119,8 @@ class XML_Transceiver(object):
             isfirst = False
             line2 = line2 + "self."+car
         line2 = line2 +"]"
+        if not "initiative" in tab_carac:
+            line2 = line2 + "\n\t\tself.initiative = 0"
         line2 = line2 + "\n\t\tself.nbCaracPrinc = " + nbCaracPrinc
         line2 = line2 + "\n\t\tself.competances = []"
         line2 = line2 + "\n\t\tself.sorts = []"

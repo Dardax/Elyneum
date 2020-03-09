@@ -62,6 +62,7 @@ class Personnage(object):
 			"valeur" : ""
 		}
 		self.tab_carac = [self.force, self.agilite, self.intelligence, self.charisme, self.perseption, self.point_de_vie, self.point_de_mana, self.esquive, self.parade, self.armure]
+		self.initiative = 0
 		self.nbCaracPrinc = 5
 		self.competances = []
 		self.sorts = []
