@@ -8,11 +8,10 @@ ENTETE_PYTHON = "# encoding: utf-8\nimport Roll\n\nclass Personnage(object):\n\t
 class XML_Transceiver(object):
     """Transceiver appelé depuis le managaer de transceiver pour utiliser des fichiers XML"""
 
-    def __init__(self):
-        pass
+    def __init__(self,sys):
+        self.systeme = sys
 
     def lire_personnage(self,path):
-
         description =[]
         retour=[]
         competances =[]
@@ -28,34 +27,102 @@ class XML_Transceiver(object):
         sort = personnage.find("Sort")
         equipement = personnage.find("Equipements")
         inventaire = personnage.find("Inventaire")
+        if carac_princ is not None:
+            for cara in carac_princ:
+                retour.append(cara.text)
 
-        for cara in carac_princ:
-            retour.append(cara.text)
-        for cara in carac_secon:
-            retour.append(cara.text)
-        for spell in sort:
-            sorts.append(spell.attrib["nom"])
-        for stuff in equipement:
-            equip.append(stuff.attrib["nom"])
-        for objet in inventaire:
-            inv.append(objet.attrib["nom"])
+        if carac_secon is not None:
+            for cara in carac_secon:
+                retour.append(cara.text)
 
-        return desc, retour, competances, sorts, equip, inv
+        if sort is not None:
+            for spell in sort:
+                sorts.append(spell.attrib["nom"])
+
+        if equipement is not None:
+            for stuff in equipement:
+                equip.append(stuff.attrib["nom"])
+
+        if inventaire is not None:
+            for objet in inventaire:
+                inv.append(objet.attrib["nom"])
+
+        if personnage is not None:
+            for objet in personnage.attrib.keys():
+                description.append(personnage.attrib[objet])
+
+        return description, retour, competances, sorts, equip, inv
 
     def lire_armure(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armures.xml"
+        tree = ET.parse(path)
+        root = tree.getroot()
+        tab = []
+        dic = {}
+        for armors in root:
+           for armor in armors.attrib.keys():
+               dic[armor] = armors.attrib[armor]
+           dic["Description"] = armor.text
+           tab.append(dic)
+           dic={}
+        return tab
+
 
     def lire_arme(self):
-        pass
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armes.xml"
+        tree = ET.parse(path)
+        root = tree.getroot()
+        tab = []
+        dic = {}
+        for armors in root:
+           for armor in armors.attrib.keys():
+               dic[armor] = armors.attrib[armor]
+           dic["Description"] = armor.text
+           tab.append(dic)
+           dic={}
+        return tab
 
     def lire_sort(self):
-        pass
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Sorts.xml"
+        tree = ET.parse(path)
+        root = tree.getroot()
+        tab = []
+        dic = {}
+        for armors in root:
+           for armor in armors.attrib.keys():
+               dic[armor] = armors.attrib[armor]
+           dic["Description"] = armor.text
+           tab.append(dic)
+           dic={}
+        return tab
 
     def lire_competances(self):
-        pass
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Competances.xml"
+        tree = ET.parse(path)
+        root = tree.getroot()
+        tab = []
+        dic = {}
+        for armors in root:
+           for armor in armors.attrib.keys():
+               dic[armor] = armors.attrib[armor]
+           dic["Description"] = armor.text
+           tab.append(dic)
+           dic={}
+        return tab
     
     def lire_objet(self):
-        pass
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Objets.xml"
+        tree = ET.parse(path)
+        root = tree.getroot()
+        tab = []
+        dic = {}
+        for armors in root:
+           for armor in armors.attrib.keys():
+               dic[armor] = armors.attrib[armor]
+           dic["Description"] = armor.text
+           tab.append(dic)
+           dic={}
+        return tab
 
     def read_modele(self, path):
         """Methode de lecture du modele en vue de créer Personnage.py"""
@@ -214,35 +281,102 @@ class XML_Transceiver(object):
         fichier.write(line)
         fichier.close()
 
-    def sauver_arme(self,arme,systeme):
-        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+systeme+"\Collection\Arme.xml"
+    def sauver_arme(self,arme):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armes.xml"
         line =""
+        
         if not op.isfile(path):
-           line = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-        line = line+ "\n<Arme"
+           line = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Armes>"
+        else:
+            fichier = open(path,"r", encoding='utf-8')
+            line = line + fichier.read()[:-9]
+            fichier.close()
+        line = line+ "\n\t<Arme"
         for attribut in arme.keys():
             if attribut != "Description":
                 line = line +" "+attribut+"=\""+arme[attribut]+"\""
             else:
-                line = line +">"+arme[attribut]+"</Arme>"
-        fichier = open(path,"a", encoding='utf-8')
+                line = line +">"+arme[attribut]+"</Arme>\n</Armes>"
+        fichier = open(path,"w", encoding='utf-8')
         fichier.write(line)
         fichier.close()
+        
 
-    def sauver_armure(self, armure, systeme):
-        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+systeme+"\Collection\Armure.xml"
+    def sauver_armure(self, armure):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armures.xml"
         line =""
         if not op.isfile(path):
-           line = "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
-        line = line+ "\n<Armure"
+           line = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Armures>"
+        else:
+            fichier = open(path,"r", encoding='utf-8')
+            line = line + fichier.read()[:-11]
+            fichier.close()
+        line = line+ "\n\t<Armure"
         for attribut in armure.keys():
             if attribut != "Description":
                 line = line +" "+attribut+"=\""+armure[attribut]+"\""
             else:
-                line = line +">"+armure[attribut]+"</Armure>"
-        fichier = open(path,"a", encoding='utf-8')
+                line = line +">"+armure[attribut]+"</Armure>\n</Armures>"
+        fichier = open(path,"w", encoding='utf-8')
         fichier.write(line)
         fichier.close()
 
-object = XML_Transceiver()
+    def sauver_competance(self,competance):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Competances.xml"
+        line =""
+        if not op.isfile(path):
+           line = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Competances>"
+        else:
+            fichier = open(path,"r", encoding='utf-8')
+            line = line + fichier.read()[:-15]
+            fichier.close()
+        line = line+ "\n\t<Competance"
+        for attribut in competance.keys():
+            if attribut != "Description":
+                line = line +" "+attribut+"=\""+competance[attribut]+"\""
+            else:
+                line = line +">"+competance[attribut]+"</Competance>\n</Competances>"
+        fichier = open(path,"w", encoding='utf-8')
+        fichier.write(line)
+        fichier.close()
+
+    def sauver_sort(self,sort):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Sorts.xml"
+        line =""
+        if not op.isfile(path):
+           line = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Sorts>"
+        else:
+            fichier = open(path,"r", encoding='utf-8')
+            line = line + fichier.read()[:-9]
+            fichier.close()
+        line = line+ "\n\t<Sort"
+        for attribut in sort.keys():
+            if attribut != "Description":
+                line = line +" "+attribut+"=\""+sort[attribut]+"\""
+            else:
+                line = line +">"+sort[attribut]+"</Sort>\n</Sorts>"
+        fichier = open(path,"w", encoding='utf-8')
+        fichier.write(line)
+        fichier.close()
+
+    def sauver_objet(self,objet):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Objets.xml"
+        line =""
+        if not op.isfile(path):
+           line = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Objets>"
+        else:
+            fichier = open(path,"r", encoding='utf-8')
+            line = line + fichier.read()[:-10]
+            fichier.close()
+        line = line+ "\n\t<Objet"
+        for attribut in objet.keys():
+            if attribut != "Description":
+                line = line +" "+attribut+"=\""+objet[attribut]+"\""
+            else:
+                line = line +">"+objet[attribut]+"</Objet>\n</Objets>"
+        fichier = open(path,"w", encoding='utf-8')
+        fichier.write(line)
+        fichier.close()
+
+object = XML_Transceiver("Algarn")
 object.read_modele("C:/Application/Elyneum/Elyneum/Systeme/Algarn/Modele.xml")

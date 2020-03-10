@@ -1,4 +1,5 @@
 import Transceiver
+import Personnage
 import os
 
 class Collection(object):
@@ -17,7 +18,7 @@ class Collection(object):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Personnage"
         for element in os.listdir(path):
             desc, cara, competances, sorts, equip, inv = self.transceiver.lire_personnage(path+"\\"+element)
-            perso = Personnage(*cara,*desc)
+            perso = Personnage.Personnage(*cara,*desc)
             for comp in competances:
                 for com in self.competances:
                     if com["nom"]==comp:
@@ -26,7 +27,7 @@ class Collection(object):
                 for s in self.sorts:
                     if s["nom"]==sor:
                         perso.addSpell(s)
-            for equi in equi:
+            for equi in equip:
                 for arme in self.armes:
                     if arme["nom"]==equi:
                         perso.addEquip(arme)
@@ -40,6 +41,7 @@ class Collection(object):
 
     def reload_armure(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armures.xml"
+        print(self.transceiver.lire_armure())
 
     def reload_arme(self):
         pass

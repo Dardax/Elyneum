@@ -7,7 +7,7 @@ perso = Personnage.Personnage("","","","","","","","","","","Testes1","","","")
 perso1 = Personnage.Personnage("","","","","","","","","","","Testes2","","","")
 perso2 = Personnage.Personnage("","","","","","","","","","","Testes3","","","")
 
-transceiver = XML_Transceiver.XML_Transceiver()
+transceiver = XML_Transceiver.XML_Transceiver("Algarn")
 perso.addComp(("Accrobatie", "tu vol"))
 perso.addSpell(("FireBall", "Lance une boule de feu"))
 perso.addEquip(("Epée","quicoupe"))
@@ -24,8 +24,28 @@ armure = {"nom": "lepoulet",
         "effet":"deviens rouge",
         "Description":"desc"}
 
-transceiver.sauver_arme(arme,"Algarn")
-transceiver.sauver_armure(armure,"Algarn")
+competance = {
+    "nom" : "accrobatie",
+    "Description" : "fait des sauts"
+    }
+sort = {
+    "nom" : "accrobatie",
+    "cout":"3",
+    "Description" : "fait des sauts"
+    }
+objet={
+    "nom" : "corde",
+    "Description" : "3m"
+    }
+
+transceiver.sauver_arme(arme)
+arme["nom"] = "2eme"
+transceiver.sauver_arme(arme)
+
+transceiver.sauver_armure(armure)
+transceiver.sauver_competance(competance)
+transceiver.sauver_sort(sort)
+transceiver.sauver_objet(objet)
 
 combat = Combat.Combat()
 combat.addMonster(perso)
@@ -34,3 +54,4 @@ combat.addMonster(perso2)
 combat.commencer()
 collec = Collection.Collection("Algarn")
 collec.reload_perso()
+collec.reload_armure()
