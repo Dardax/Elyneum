@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Armures>
 	<Armure nom="lepoulet" armure="15" effet="deviens rouge">desc</Armure>
-	<Armure nom="lepoulet" armure="15" effet="deviens rouge">desc</Armure>
-	<Armure nom="lepoulet" armure="15" effet="deviens rouge">desc</Armure>
-	<Armure nom="lepoulet" armure="15" effet="deviens rouge">desc</Armure>
 </Armures>

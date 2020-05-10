@@ -5,11 +5,164 @@ import os.path as op
 ENTETE_PYTHON = "# encoding: utf-8\nimport Roll\n\nclass Personnage(object):\n\t"
 
 
-class XML_Transceiver(object):
+class XML_Transceiver:
     """Transceiver appelé depuis le managaer de transceiver pour utiliser des fichiers XML"""
 
-    def __init__(self,sys):
+    def __init__(self,sys=""):
         self.systeme = sys
+
+    def lire_sauvegarde(self, nom):
+        #TODO: A refaire
+        from Combat import Combat
+        from Personnage import Personnage
+        from Elyneum import Partie
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Sauvegarde\\"+nom+".xml" 
+        tree = ET.parse(path)
+        combats = tree.getroot()
+        combats = combats.findall("Combat")
+        partie = Partie(nom)
+        for combat in combats:
+            comb = Combat([],[])
+            comb.rename(combat.attrib["nom"])
+            comb.turn = combat.attrib["turn"]
+            stack =  combat.attrib["stack"]
+            joueurs = combat.find("Joueurs")
+            monstres = combat.find("Monstres")
+
+
+            for personnage in joueurs:
+                description =[]
+                retour=[]
+                competances =[]
+                sorts =[]
+                equip = []
+                inv =[]
+                carac_princ = personnage.find("Carac_Principal")
+                carac_secon = personnage.find("Carac_Secondaire")
+                competance = personnage.find("Competances")
+                sort = personnage.find("Sorts")
+                equipement = personnage.find("Equipements")
+                inventaire = personnage.find("Inventaire")
+                if carac_princ is not None:
+                    for cara in carac_princ:
+                        retour.append(cara.text)
+
+                if carac_secon is not None:
+                    for cara in carac_secon:
+                        retour.append(cara.text)
+
+                if competance is not None:
+                    for comp in competance:
+                        dic = comp.attrib
+                        dic["Description"] = comp.text
+                        competances.append(dic)
+
+                if sort is not None:
+                    for spell in sort:
+                        dic = spell.attrib
+                        dic["Description"] = spell.text
+                        sorts.append(dic)
+
+                if equipement is not None:
+                    for stuff in equipement:
+                        dic = stuff.attrib
+                        dic["Description"] = stuff.text
+                        equip.append(dic)
+
+                if inventaire is not None:
+                    for objet in inventaire:
+                        dic = objet.attrib
+                        dic["Description"] = objet.text
+                        inv.append(dic)
+
+                if personnage is not None:
+                    for objet in personnage.attrib.keys():
+                        description.append(personnage.attrib[objet])
+                
+                
+                perso = Personnage(*retour,*description)
+                for comp in competances:
+                    perso.addComp(comp)
+
+                for sor in sorts:
+                    perso.addSpell(sor)
+
+                for equi in equip:
+                    perso.addEquip(equi)
+                    
+                for objet_n in inv:
+                    perso.addInvent(objet_n)
+
+                comb.addPlayer(perso)
+        
+
+            for personnage in monstres:
+                description =[]
+                retour=[]
+                competances =[]
+                sorts =[]
+                equip = []
+                inv =[]
+                carac_princ = personnage.find("Carac_Principal")
+                carac_secon = personnage.find("Carac_Secondaire")
+                competance = personnage.find("Competances")
+                sort = personnage.find("Sorts")
+                equipement = personnage.find("Equipements")
+                inventaire = personnage.find("Inventaire")
+                if carac_princ is not None:
+                    for cara in carac_princ:
+                        retour.append(cara.text)
+
+                if carac_secon is not None:
+                    for cara in carac_secon:
+                        retour.append(cara.text)
+
+                if competance is not None:
+                    for comp in competance:
+                        dic = comp.attrib
+                        dic["Description"] = comp.text
+                        competances.append(dic)
+
+                if sort is not None:
+                    for spell in sort:
+                        dic = spell.attrib
+                        dic["Description"] = spell.text
+                        sorts.append(dic)
+
+                if equipement is not None:
+                    for stuff in equipement:
+                        dic = stuff.attrib
+                        dic["Description"] = stuff.text
+                        equip.append(dic)
+
+                if inventaire is not None:
+                    for objet in inventaire:
+                        dic = objet.attrib
+                        dic["Description"] = objet.text
+                        inv.append(dic)
+
+                if personnage is not None:
+                    for objet in personnage.attrib.keys():
+                        description.append(personnage.attrib[objet])
+                
+                
+                perso = Personnage(*retour,*description)
+                for comp in competances:
+                    perso.addComp(comp)
+
+                for sor in sorts:
+                    perso.addSpell(sor)
+
+                for equi in equip:
+                    perso.addEquip(equi)
+                    
+                for objet_n in inv:
+                    perso.addInvent(objet_n)
+                comb.addMonster(perso)
+            stack = stack.replace("[","").replace("]","").replace(" ","").replace("'","").split(",")
+            comb.remake_stack(stack) 
+            partie.addCombat(comb)
+        return partie
 
     def lire_personnage(self,path):
         description =[]
@@ -23,8 +176,8 @@ class XML_Transceiver(object):
         personnage = tree.getroot()
         carac_princ = personnage.find("Carac_Principal")
         carac_secon = personnage.find("Carac_Secondaire")
-        competance = personnage.find("Competance")
-        sort = personnage.find("Sort")
+        competance = personnage.find("Competances")
+        sort = personnage.find("Sorts")
         equipement = personnage.find("Equipements")
         inventaire = personnage.find("Inventaire")
         if carac_princ is not None:
@@ -38,6 +191,10 @@ class XML_Transceiver(object):
         if sort is not None:
             for spell in sort:
                 sorts.append(spell.attrib["nom"])
+
+        if competance is not None:
+            for spell in competance:
+                competances.append(spell.attrib["nom"])
 
         if equipement is not None:
             for stuff in equipement:
@@ -62,11 +219,10 @@ class XML_Transceiver(object):
         for armors in root:
            for armor in armors.attrib.keys():
                dic[armor] = armors.attrib[armor]
-           dic["Description"] = armor.text
+           dic["Description"] = armors.text
            tab.append(dic)
            dic={}
         return tab
-
 
     def lire_arme(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armes.xml"
@@ -77,7 +233,7 @@ class XML_Transceiver(object):
         for armors in root:
            for armor in armors.attrib.keys():
                dic[armor] = armors.attrib[armor]
-           dic["Description"] = armor.text
+           dic["Description"] = armors.text
            tab.append(dic)
            dic={}
         return tab
@@ -91,12 +247,12 @@ class XML_Transceiver(object):
         for armors in root:
            for armor in armors.attrib.keys():
                dic[armor] = armors.attrib[armor]
-           dic["Description"] = armor.text
+           dic["Description"] = armors.text
            tab.append(dic)
            dic={}
         return tab
 
-    def lire_competances(self):
+    def lire_competance(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Competances.xml"
         tree = ET.parse(path)
         root = tree.getroot()
@@ -105,7 +261,7 @@ class XML_Transceiver(object):
         for armors in root:
            for armor in armors.attrib.keys():
                dic[armor] = armors.attrib[armor]
-           dic["Description"] = armor.text
+           dic["Description"] = armors.text
            tab.append(dic)
            dic={}
         return tab
@@ -119,7 +275,7 @@ class XML_Transceiver(object):
         for armors in root:
            for armor in armors.attrib.keys():
                dic[armor] = armors.attrib[armor]
-           dic["Description"] = armor.text
+           dic["Description"] = armors.text
            tab.append(dic)
            dic={}
         return tab
@@ -239,7 +395,6 @@ class XML_Transceiver(object):
         fichier.write(line)
         fichier.close()
         
-
     def sauver_personnage(self, personnage):
         line ="<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Personnage"
         desc = personnage.getDesc()
@@ -266,16 +421,36 @@ class XML_Transceiver(object):
                     line = line + ">" + str(personnage.tab_carac[i+nbCarPrin]["valeur"]) + "</Carac>"
         line = line +"\n\t</Carac_Secondaire>\n\t<Competances>"
         for val in personnage.competances:
-            line = line + "\n\t\t<Competance nom=\""+val[0]+"\">"+val[1]+"</Competance>"
+            line = line + "\n\t\t<Competance"
+            for attribut in val.keys():
+                if attribut != "Description":
+                    line = line +" "+attribut+"=\""+val[attribut]+"\""
+                else:
+                    line = line +">"+val[attribut]+"</Competance>"
         line = line +"\n\t</Competances>\n\t<Sorts>"
         for val in personnage.sorts:
-            line = line + "\n\t\t<Sort nom=\""+val[0]+"\">"+val[1]+"</Sort>"
+            line = line + "\n\t\t<Sort "
+            for attribut in val.keys():
+                if attribut != "Description":
+                    line = line +" "+attribut+"=\""+val[attribut]+"\""
+                else:
+                    line = line +">"+val[attribut]+"</Sort>"
         line = line +"\n\t</Sorts>\n\t<Equipements>"
         for val in personnage.equipements:
-            line = line + "\n\t\t<Equipement nom=\""+val[0]+"\">"+val[1]+"</Equipement>"
+            line = line + "\n\t\t<Equipement "
+            for attribut in val.keys():
+                if attribut != "Description":
+                    line = line +" "+attribut+"=\""+val[attribut]+"\""
+                else:
+                    line = line +">"+val[attribut]+"</Equipement>"
         line = line +"\n\t</Equipements>\n\t<Inventaire>"
         for val in personnage.inventaire:
-            line = line + "\n\t\t<Objet nom=\""+val[0]+"\">"+val[1]+"</Objet>"
+            line = line + "\n\t\t<Objet "
+            for attribut in val.keys():
+                if attribut != "Description":
+                    line = line +" "+attribut+"=\""+val[attribut]+"\""
+                else:
+                    line = line +">"+val[attribut]+"</Objet>"
         line = line +"\n\t</Inventaire>\n</Personnage>"
         fichier = open("C:\Application\Elyneum\Elyneum\Systeme\\"+personnage.systeme+"\Collection\Personnage\\"+personnage.desc["nom"]+".xml","w", encoding='utf-8')
         fichier.write(line)
@@ -301,7 +476,6 @@ class XML_Transceiver(object):
         fichier.write(line)
         fichier.close()
         
-
     def sauver_armure(self, armure):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armures.xml"
         line =""
@@ -378,5 +552,135 @@ class XML_Transceiver(object):
         fichier.write(line)
         fichier.close()
 
-object = XML_Transceiver("Algarn")
-object.read_modele("C:/Application/Elyneum/Elyneum/Systeme/Algarn/Modele.xml")
+    def sauvegarder(self, partie):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Sauvegarde\\"+partie.getNom().replace(" ","_")+".xml"
+        line = "<Partie>"
+        combats= partie.getCombats()
+        for combat in combats:
+            line = line + "\n\t<Combat nom=\""+combat.nom+"\" turn=\""+str(combat.turn)+"\" stack =\""+str(combat.getStack())+"\">"
+            line =line + "\n\t\t<Joueurs>"
+            for personnage in combat.getPlayers():
+                line = line + "\n\t\t\t<Joueur"
+                desc = personnage.getDesc()
+                for car in desc.keys():
+                    line = line +" "+car+"=\""+ desc[car]+"\""
+                line = line + ">\n\t\t\t\t<Carac_Principal>"
+                nbCarPrin = personnage.nbCaracPrinc
+                for i in range(nbCarPrin):
+                    line = line + "\n\t\t\t\t\t<Carac"
+                    attrib_list = personnage.tab_carac[i].keys()
+                    for attrib in attrib_list:
+                        if attrib != "valeur":
+                            line = line + " " + attrib + "=\"" + personnage.tab_carac[i][attrib]+"\""
+                        else:
+                            line = line + ">" + str(personnage.tab_carac[i]["valeur"]) + "</Carac>"
+                line = line + "\n\t\t\t\t</Carac_Principal>\n\t\t\t\t<Carac_Secondaire>"
+                for i in range(len(personnage.tab_carac)-nbCarPrin):
+                    line = line + "\n\t\t\t\t\t<Carac"
+                    attrib_list = personnage.tab_carac[i+nbCarPrin].keys()
+                    for attrib in attrib_list:
+                        if attrib != "valeur":
+                            line = line + " " + attrib + "=\"" + personnage.tab_carac[i+nbCarPrin][attrib]+"\""
+                        else:
+                            line = line + ">" + str(personnage.tab_carac[i+nbCarPrin]["valeur"]) + "</Carac>"
+                line = line +"\n\t\t\t\t</Carac_Secondaire>\n\t\t\t\t<Competances>"
+                for val in personnage.competances:
+                    line = line + "\n\t\t\t\t\t<Competance"
+                    for attribut in val.keys():
+                        if attribut != "Description":
+                            line = line +" "+attribut+"=\""+val[attribut]+"\""
+                        else:
+                            line = line +">"+val[attribut]+"</Competance>"
+                line = line +"\n\t\t\t\t</Competances>\n\t\t\t\t<Sorts>"
+                for val in personnage.sorts:
+                    line = line + "\n\t\t\t\t\t<Sort"
+                    for attribut in val.keys():
+                        if attribut != "Description":
+                            line = line +" "+attribut+"=\""+val[attribut]+"\""
+                        else:
+                            line = line +">"+val[attribut]+"</Sort>"
+                line = line +"\n\t\t\t\t</Sorts>\n\t\t\t\t<Equipements>"
+                for val in personnage.equipements:
+                    line = line + "\n\t\t\t\t\t<Equipement"
+                    for attribut in val.keys():
+                        if attribut != "Description":
+                            line = line +" "+attribut+"=\""+val[attribut]+"\""
+                        else:
+                            line = line +">"+val[attribut]+"</Equipement>"
+                line = line +"\n\t\t\t\t</Equipements>\n\t\t\t\t<Inventaire>"
+                for val in personnage.inventaire:
+                    line = line + "\n\t\t\t\t\t<Objet"
+                    for attribut in val.keys():
+                        if attribut != "Description":
+                            line = line +" "+attribut+"=\""+val[attribut]+"\""
+                        else:
+                            line = line +">"+val[attribut]+"</Objet>"
+                line = line + "\n\t\t\t\t</Inventaire>\n\t\t\t</Joueur>"
+            line = line +"\n\t\t</Joueurs>\n\t\t<Monstres>"
+#--------------------------------------------------------------------------------------------------------------------------------
+            for personnage in combat.getMonsters():
+                line = line + "\n\t\t\t<Monstre"
+                desc = personnage.getDesc()
+                for car in desc.keys():
+                    line = line +" "+car+"=\""+ desc[car]+"\""
+                line = line + ">\n\t\t\t\t<Carac_Principal>"
+                nbCarPrin = personnage.nbCaracPrinc
+                for i in range(nbCarPrin):
+                    line = line + "\n\t\t\t\t\t<Carac"
+                    attrib_list = personnage.tab_carac[i].keys()
+                    for attrib in attrib_list:
+                        if attrib != "valeur":
+                            line = line + " " + attrib + "=\"" + personnage.tab_carac[i][attrib]+"\""
+                        else:
+                            line = line + ">" + str(personnage.tab_carac[i]["valeur"]) + "</Carac>"
+                line = line + "\n\t\t\t\t</Carac_Principal>\n\t\t\t\t<Carac_Secondaire>"
+                for i in range(len(personnage.tab_carac)-nbCarPrin):
+                    line = line + "\n\t\t\t\t\t<Carac"
+                    attrib_list = personnage.tab_carac[i+nbCarPrin].keys()
+                    for attrib in attrib_list:
+                        if attrib != "valeur":
+                            line = line + " " + attrib + "=\"" + personnage.tab_carac[i+nbCarPrin][attrib]+"\""
+                        else:
+                            line = line + ">" + str(personnage.tab_carac[i+nbCarPrin]["valeur"]) + "</Carac>"
+                line = line +"\n\t\t\t\t</Carac_Secondaire>\n\t\t\t\t<Competances>"
+                for val in personnage.competances:
+                    line = line + "\n\t\t\t\t\t<Competance"
+                    for attribut in val.keys():
+                        if attribut != "Description":
+                            line = line +" "+attribut+"=\""+val[attribut]+"\""
+                        else:
+                            line = line +">"+val[attribut]+"</Competance>"
+                line = line +"\n\t\t\t\t</Competances>\n\t\t\t\t<Sorts>"
+                for val in personnage.sorts:
+                    line = line + "\n\t\t\t\t\t<Sort"
+                    for attribut in val.keys():
+                        if attribut != "Description":
+                            line = line +" "+attribut+"=\""+val[attribut]+"\""
+                        else:
+                            line = line +">"+val[attribut]+"</Sort>"
+                line = line +"\n\t\t\t\t</Sorts>\n\t\t\t\t<Equipements>"
+                for val in personnage.equipements:
+                    line = line + "\n\t\t\t\t\t<Equipement"
+                    for attribut in val.keys():
+                        if attribut != "Description":
+                            line = line +" "+attribut+"=\""+val[attribut]+"\""
+                        else:
+                            line = line +">"+val[attribut]+"</Equipement>"
+                line = line +"\n\t\t\t\t</Equipements>\n\t\t\t\t<Inventaire>"
+                for val in personnage.inventaire:
+                    line = line + "\n\t\t\t\t\t<Objet"
+                    for attribut in val.keys():
+                        if attribut != "Description":
+                            line = line +" "+attribut+"=\""+val[attribut]+"\""
+                        else:
+                            line = line +">"+val[attribut]+"</Objet>"
+                line = line + "\n\t\t\t\t</Inventaire>\n\t\t\t</Monstre>"
+            line = line +"\n\t\t</Monstres>\n\t</Combat>"
+        line = line + "\n</Partie>"
+        fichier = open(path,"w", encoding='utf-8')
+        fichier.write(line)
+        fichier.close()
+
+#transceiver = XML_Transceiver("Algarn")
+#transceiver.read_modele("C:\Application\Elyneum\Elyneum\Systeme\Algarn\Modele.xml")
+#transceiver.lire_sauvegarde("aLELJD")

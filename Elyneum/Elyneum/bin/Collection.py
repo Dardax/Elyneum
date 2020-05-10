@@ -2,15 +2,15 @@ import Transceiver
 import Personnage
 import os
 
-class Collection(object):
+class Collection:
     """description of class"""
     def __init__(self, systeme):
         self.personnages = []
         self.armes = []
-        self.armure = []
+        self.armures = []
         self.sorts =[]
         self.competances = []
-        self.objet = []
+        self.objets = []
         self.systeme = systeme
         self.transceiver = Transceiver.Transceiver(systeme)
 
@@ -31,27 +31,32 @@ class Collection(object):
                 for arme in self.armes:
                     if arme["nom"]==equi:
                         perso.addEquip(arme)
-                for armure in self.armure:
+                for armure in self.armures:
                     if armure["nom"]==equi:
                         perso.addEquip(armure)
             for objet_n in inv:
-                for obj in self.objet:
+                for obj in self.objets:
                     if obj["nom"]==objet_n:
                         perso.addInvent(obj)
+            self.personnages.append(perso)
 
     def reload_armure(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armures.xml"
-        print(self.transceiver.lire_armure())
+        self.armures = self.transceiver.lire_armure()
 
     def reload_arme(self):
-        pass
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armes.xml"
+        self.armes = self.transceiver.lire_arme()
 
     def reload_sort(self):
-        pass
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Sorts.xml"
+        self.sorts = self.transceiver.lire_sort()
 
     def reload_competances(self):
-        pass
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Competances.xml"
+        self.competances = self.transceiver.lire_competance()
     
     def reload_objet(self):
-        pass
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Objets.xml"
+        self.objets = self.transceiver.lire_objet()
 

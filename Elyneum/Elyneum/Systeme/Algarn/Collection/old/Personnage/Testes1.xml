@@ -2,23 +2,23 @@
 <Personnage nom="Testes1" race="" niveau="" age="">
 	<Carac_Principal>
 		<Carac nom_long="Force" nom_court="FOR">73</Carac>
-		<Carac nom_long="Agilité" nom_court="AGI">57</Carac>
-		<Carac nom_long="Intelligence" nom_court="INT">52</Carac>
-		<Carac nom_long="Charisme" nom_court="CHA">37</Carac>
-		<Carac nom_long="Perseption" nom_court="PER">33</Carac>
+		<Carac nom_long="Agilité" nom_court="AGI">65</Carac>
+		<Carac nom_long="Intelligence" nom_court="INT">67</Carac>
+		<Carac nom_long="Charisme" nom_court="CHA">64</Carac>
+		<Carac nom_long="Perseption" nom_court="PER">46</Carac>
 	</Carac_Principal>
 	<Carac_Secondaire>
 		<Carac nom_long="Point de vie" nom_court="PV">24</Carac>
-		<Carac nom_long="Point de mana" nom_court="PM">5</Carac>
-		<Carac nom_long="Esquive" nom_court="Esq">28</Carac>
-		<Carac nom_long="Parade" nom_court="Par">5</Carac>
+		<Carac nom_long="Point de mana" nom_court="PM">6</Carac>
+		<Carac nom_long="Esquive" nom_court="Esq">32</Carac>
+		<Carac nom_long="Parade" nom_court="Par">6</Carac>
 		<Carac nom_long="Armure" nom_court="Arm">0</Carac>
 	</Carac_Secondaire>
 	<Competances>
 		<Competance nom="accrobatie">fait des sauts</Competance>
 	</Competances>
 	<Sorts>
-		<Sort  nom="boule de feu" cout="3">fait des boom</Sort>
+		<Sort  nom="accrobatie" cout="3">fait des sauts</Sort>
 	</Sorts>
 	<Equipements>
 		<Equipement  nom="lepoulet" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Equipement>

@@ -1,22 +1,37 @@
 import random
 
-class Combat(object):
+class Combat:
     """description of class"""
-    def __init__(self,joueurs=[],monstres=[]):
     
+
+    def __init__(self,joueurs=[],monstres=[]):
+        
         self.joueur = joueurs
         self.monstre = monstres
+        self.nom=""
         self.stackIni = []
         self.turn = 0
 
     def commencer(self):
-        self.stackIni = self.monstre + self.joueur
+        self.stackIni = self.monstre + self.joueur 
         for perso in self.stackIni :
             perso.initiative = perso.initiative + random.randint(1,20)
         self.tri_bulle(self.stackIni)
-        #for j in self.stackIni:
-        #    print("{0}:{1}".format(j.desc["nom"],j.initiative))
+        print(self.nom + " - Battle Begin !")
+
+    def rename(self,nom):
+        self.nom = nom
             
+    def remake_stack(self, stackname):
+        self.stackIni = []
+        for name in stackname:
+            for mons in self.monstre:
+                if name == mons.getDesc()["nom"]:
+                    self.stackIni.append(mons)
+            for pers in self.joueur:
+                if name == pers.getDesc()["nom"]:
+                    self.stackIni.append(pers)
+
     def nextTurn(self):
         self.turn = self.turn +1
         if self.turn == len(self.stackIni):
@@ -57,5 +72,11 @@ class Combat(object):
         self.monstre.append(monster)
         return True
 
-    def isDead(self, perso):
+    def kill(self, perso):
         self.stackIni.remove(perso)
+
+    def getStack(self):
+        stack =[]
+        for perso in self.stackIni:
+            stack.append(perso.desc["nom"])
+        return stack

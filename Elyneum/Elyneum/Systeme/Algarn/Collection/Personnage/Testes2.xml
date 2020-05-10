@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Personnage nom="Testes2" race="" niveau="" age="">
+	<Carac_Principal>
+		<Carac nom_long="Force" nom_court="FOR">78</Carac>
+		<Carac nom_long="Agilité" nom_court="AGI">43</Carac>
+		<Carac nom_long="Intelligence" nom_court="INT">42</Carac>
+		<Carac nom_long="Charisme" nom_court="CHA">42</Carac>
+		<Carac nom_long="Perseption" nom_court="PER">35</Carac>
+	</Carac_Principal>
+	<Carac_Secondaire>
+		<Carac nom_long="Point de vie" nom_court="PV">26</Carac>
+		<Carac nom_long="Point de mana" nom_court="PM">4</Carac>
+		<Carac nom_long="Esquive" nom_court="Esq">21</Carac>
+		<Carac nom_long="Parade" nom_court="Par">4</Carac>
+		<Carac nom_long="Armure" nom_court="Arm">2</Carac>
+	</Carac_Secondaire>
+	<Competances>
+	</Competances>
+	<Sorts>
+	</Sorts>
+	<Equipements>
+	</Equipements>
+	<Inventaire>
+	</Inventaire>
+</Personnage>

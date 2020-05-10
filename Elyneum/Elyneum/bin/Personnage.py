@@ -59,7 +59,7 @@ class Personnage(object):
 		self.armure = {
 			"nom_long" : "Armure",
 			"nom_court" : "Arm",
-			"valeur" : ""
+			"valeur" : "0"
 		}
 		self.tab_carac = [self.force, self.agilite, self.intelligence, self.charisme, self.perseption, self.point_de_vie, self.point_de_mana, self.esquive, self.parade, self.armure]
 		self.initiative = 0

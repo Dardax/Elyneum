@@ -5,7 +5,7 @@
     <ProjectGuid>b98339ab-74ab-45fc-a22a-bcc98713bae2</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>bin\Elyneum.py</StartupFile>
-    <SearchPath>bin</SearchPath>
+    <SearchPath>..\Elyneum;bin;IHM;pres</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Elyneum</Name>
@@ -20,6 +20,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="bin\module1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="bin\Personnage.py" />
     <Compile Include="bin\Transceiver.py">
       <SubType>Code</SubType>
     </Compile>
@@ -36,9 +40,32 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="bin\Elyneum.py" />
+    <Compile Include="IHM\IHMCombat.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IHM\Launcher.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IHM\MainPage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IHM\FicheDePerso.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IHM\IHMCollection.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IHM\module1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pres\Presenter.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="IHM\" />
+    <Folder Include="pres\" />
     <Folder Include="Systeme\" />
     <Folder Include="Systeme\Algarne\" />
     <Folder Include="Systeme\Algarne\Collection\" />

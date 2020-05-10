@@ -2,10 +2,4 @@
 <Armes>
 	<Arme nom="lepoulet" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Arme>
 	<Arme nom="2eme" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Arme>
-	<Arme nom="lepoulet" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Arme>
-	<Arme nom="2eme" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Arme>
-	<Arme nom="lepoulet" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Arme>
-	<Arme nom="2eme" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Arme>
-	<Arme nom="lepoulet" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Arme>
-	<Arme nom="2eme" degat="1d5" modificateur="+5" effet="deviens rouge">desc</Arme>
 </Armes>
