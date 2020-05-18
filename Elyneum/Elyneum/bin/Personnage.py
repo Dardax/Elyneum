@@ -3,7 +3,7 @@ import Roll
 
 class Personnage(object):
 	
-	def __init__(self, force, agilite, intelligence, charisme, perseption, point_de_vie, point_de_mana, esquive, parade, armure, nom, race, niveau, age):
+	def __init__(self, force="", agilite="", intelligence="", charisme="", perseption="", point_de_vie="", point_de_mana="", esquive="", parade="", armure="", nom="", race="", niveau="", age="",getmodel=False):
 		self.systeme = "Algarn"
 		self.desc = {
 			"nom" : "", 
@@ -68,6 +68,9 @@ class Personnage(object):
 		self.sorts = []
 		self.equipements = []
 		self.inventaire = []
+		if getmodel:
+			return None
+
 		self.desc["nom"] = nom
 		self.desc["race"] = race
 		self.desc["niveau"] = niveau

@@ -35,14 +35,15 @@ class MainPage(object):
         self.presenter.start()
         queue.append("LOAD_COLLECTION")
         
+        
         self.window.mainloop()
         queue.insert(0,"END")
         
 
     def switchToCollection(self):
         if self.actualFrame ==self.collectionFrame: return
-        self.actualFrame.place_forget()
-        self.collectionFrame.place(x=0,y=50)
+        self.actualFrame.place_forget()    
+        self.collectionFrame.place(x=0,y=80)
         self.actualFrame = self.collectionFrame
 
     def switchToCombat(self):
@@ -54,11 +55,16 @@ class MainPage(object):
     def callback(self,com,retour):
         if com=="READ_COL_PERSOS":
             self.collectionFrame.updatePerso(retour)
-        elif com=="READ_COL_ARMES": pass
-        elif com=="READ_COL_ARMURES": pass
-        elif com=="READ_COL_OBJETS":pass
-        elif com=="READ_COL_COMPETANCES": pass
-        elif com=="READ_COL_SORTS": pass
+        elif com=="READ_COL_ARMES": 
+            self.collectionFrame.updateItem(retour,"ARME")
+        elif com=="READ_COL_ARMURES": 
+            self.collectionFrame.updateItem(retour,"ARMURE")
+        elif com=="READ_COL_OBJETS":
+            self.collectionFrame.updateItem(retour,"OBJET")
+        elif com=="READ_COL_COMPETANCES": 
+            self.collectionFrame.updateItem(retour,"COMPETANCE")
+        elif com=="READ_COL_SORTS": 
+            self.collectionFrame.updateItem(retour,"SORT")
     
 
 MainPage()

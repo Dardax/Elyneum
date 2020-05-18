@@ -40,6 +40,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="bin\Elyneum.py" />
+    <Compile Include="IHM\IHMAjout.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IHM\IHMItem.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="IHM\IHMCombat.py">
       <SubType>Code</SubType>
     </Compile>

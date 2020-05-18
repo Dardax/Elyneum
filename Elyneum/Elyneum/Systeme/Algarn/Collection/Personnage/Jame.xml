@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Personnage nom="Jame" race="elfe" niveau="23" age="25">
+	<Carac_Principal>
+		<Carac nom_long="Force" nom_court="FOR">5</Carac>
+		<Carac nom_long="Agilité" nom_court="AGI">5</Carac>
+		<Carac nom_long="Intelligence" nom_court="INT">5</Carac>
+		<Carac nom_long="Charisme" nom_court="CHA">5</Carac>
+		<Carac nom_long="Perseption" nom_court="PER">5</Carac>
+	</Carac_Principal>
+	<Carac_Secondaire>
+		<Carac nom_long="Point de vie" nom_court="PV">5</Carac>
+		<Carac nom_long="Point de mana" nom_court="PM">5</Carac>
+		<Carac nom_long="Esquive" nom_court="Esq">5</Carac>
+		<Carac nom_long="Parade" nom_court="Par">5</Carac>
+		<Carac nom_long="Armure" nom_court="Arm">5</Carac>
+	</Carac_Secondaire>
+	<Competances>
+		<Competance nom="accrobatie">fait des sauts</Competance>
+	</Competances>
+	<Sorts>
+		<Sort  nom="boule de feu" cout="3">fait des boom</Sort>
+	</Sorts>
+	<Equipements>
+	</Equipements>
+	<Inventaire>
+	</Inventaire>
+</Personnage>

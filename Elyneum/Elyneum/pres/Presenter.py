@@ -54,7 +54,13 @@ class Presenter(Thread):
 
                 elif commande == "LOAD_PERSOS": 
                     self.modele.collection.reload_perso()
+                    
                     self.callback("READ_COL_PERSOS",self.modele.collection.personnages)
+
+                elif commande[0] == "SAVE_PERSO": 
+                    self.modele.collection.sauver_personnage(commande[1])
+                    queue.insert(0,"LOAD_PERSOS")
+                
             else:
                 time.sleep(0.1)
                 

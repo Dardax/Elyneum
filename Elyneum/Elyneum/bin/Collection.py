@@ -14,7 +14,11 @@ class Collection:
         self.systeme = systeme
         self.transceiver = Transceiver.Transceiver(systeme)
 
+    def sauver_personnage(self,personnage):
+        self.transceiver.sauver_personnage(personnage)
+
     def reload_perso(self):
+        self.personnages=[]
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Personnage"
         for element in os.listdir(path):
             desc, cara, competances, sorts, equip, inv = self.transceiver.lire_personnage(path+"\\"+element)
