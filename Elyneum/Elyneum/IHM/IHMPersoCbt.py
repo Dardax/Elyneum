@@ -1,7 +1,6 @@
+
 from tkinter import *
 from tkinter import ttk
-from Presenter import queue
-
 
 class FicheDePerso(object):
     """Objet de base pour l'IHM des fiches de perso"""
@@ -13,8 +12,7 @@ class FicheDePerso(object):
         self.nomPersonnage.place(x=0,y=0)
 
         #Frame des caracteristiques
-        self.frame = ttk.Frame(self.window)
-        Button(self.frame,text="X",command=self.supprimer).grid(row=0,column=6)
+        self.frame = ttk.Frame(self.window)        
 
         #Caracteristique principal
         labelFor = Label(self.frame,text="FOR :")
@@ -92,10 +90,5 @@ class FicheDePerso(object):
 
     def place(self,**kwargs):
         self.window.place(kwargs)
-
-    def supprimer(self):
-        queue.append(("DELETE_PERSONNAGE",self.nomPersonnage.cget("text")))
-        
-
 
     

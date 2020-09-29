@@ -1,12 +1,15 @@
 from tkinter import *
 from tkinter import ttk
+from Presenter import queue
 
 class IHMItem(object):
     """description of class"""
-    def __init__(self,parent,item):
+    def __init__(self,parent,item, type = "NONE"):
         self.parent=parent
+        self.type =type
         self.item = item
         self.window= Frame(self.parent,highlightbackground="black",highlightthickness=1,height=250,width=200)
+        Button(self.window,text="X",command=self.supprimer).grid(row=0,column=3)
         self.i=0
         self.j=0
         for key in item.keys():
@@ -24,5 +27,8 @@ class IHMItem(object):
 
     def place(self,**kwargs):
         self.window.place(kwargs)
+
+    def supprimer(self):
+        queue.append(("DELETE_ITEM", self.type, self.item["nom"]))
         
 

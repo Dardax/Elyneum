@@ -17,6 +17,21 @@ class Collection:
     def sauver_personnage(self,personnage):
         self.transceiver.sauver_personnage(personnage)
 
+    def sauver_sort(self,sort):
+        self.transceiver.sauver_sort(sort)
+    
+    def sauver_arme(self,sort):
+        self.transceiver.sauver_arme(sort)
+    
+    def sauver_armure(self,sort):
+        self.transceiver.sauver_armure(sort)
+    
+    def sauver_objet(self,sort):
+        self.transceiver.sauver_objet(sort)
+    
+    def sauver_competance(self,sort):
+        self.transceiver.sauver_competance(sort)
+
     def reload_perso(self):
         self.personnages=[]
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Personnage"
@@ -63,4 +78,48 @@ class Collection:
     def reload_objet(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Objets.xml"
         self.objets = self.transceiver.lire_objet()
+
+    def supprimer_personnage(self, nom):
+        for pers in self.personnages:
+            if pers.desc["nom"] == nom :
+                self.personnages.remove(pers)
+                self.transceiver.supprimer_personnage(nom)
+                return
+
+    def supprimer_armure(self, nom):
+        for arm in self.armures:
+            if arm["nom"] == nom:
+                self.transceiver.supprimer_armure(nom)
+                self.armures.remove(arm)
+                return
+
+    def supprimer_arme(self, nom):
+        for arm in self.armes:
+            if arm["nom"] == nom:
+                self.transceiver.supprimer_arme(nom)
+                self.armes.remove(arm)
+                return
+
+    def supprimer_competence(self, nom):
+        for arm in self.competences:
+            if arm["nom"] == nom:
+                self.transceiver.supprimer_competence(nom)
+                self.competences.remove(arm)
+                return
+
+    def supprimer_sort(self, nom):
+        for arm in self.sorts:
+            if arm["nom"] == nom:
+                self.transceiver.supprimer_sort(nom)
+                self.sorts.remove(arm)
+                return
+
+    def supprimer_objet(self, nom):
+        for arm in self.objets:
+            if arm["nom"] == nom:
+                self.transceiver.supprimer_objet(nom)
+                self.objets.remove(arm)
+                return
+
+
 

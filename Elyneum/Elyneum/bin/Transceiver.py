@@ -50,3 +50,21 @@ class Transceiver:
 
     def sauver_objet(self, objet):
         self.transceiver.sauver_objet(objet)
+
+    def supprimer_personnage(self, nom):
+        self.transceiver.supprimer_personnage(nom)
+
+    def supprimer_armure(self, nom):
+        self.transceiver.supprimer_armure(nom)
+
+    def supprimer_arme(self, nom):
+        self.transceiver.supprimer_arme(nom)
+
+    def supprimer_objet(self, nom):
+        self.transceiver.supprimer_objet(nom)
+
+    def supprimer_competence(self, nom):
+        self.transceiver.supprimer_competence(nom)
+
+    def supprimer_sort(self, nom):
+        self.transceiver.supprimer_sort(nom)

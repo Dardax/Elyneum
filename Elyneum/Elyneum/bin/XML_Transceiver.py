@@ -1,6 +1,8 @@
 # encoding: utf-8
 import xml.etree.ElementTree as ET
+import os
 import os.path as op
+import time
 
 ENTETE_PYTHON = "# encoding: utf-8\nimport Roll\n\nclass Personnage(object):\n\t"
 
@@ -10,6 +12,76 @@ class XML_Transceiver:
 
     def __init__(self,sys=""):
         self.systeme = sys
+
+    def supprimer_personnage(self, nom):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\\Collection\\Personnage\\"+nom+".xml" 
+        os.remove(path)
+
+    def supprimer_arme(self, nom):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\\Collection\\Armes.xml" 
+        text = ""
+        file = open(path,"r")
+        lines = file.readlines()
+        for line in lines:
+            if line.find("nom=\""+nom+"\"") == -1:
+                text = text + line
+        file.close()
+        file=open(path, "w")
+        file.write(text)
+        file.close()
+
+    def supprimer_armure(self, nom):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\\Collection\\Armures.xml" 
+        text = ""
+        file = open(path,"r")
+        lines = file.readlines()
+        for line in lines:
+            if line.find("nom=\""+nom+"\"") == -1:
+                text = text + line
+        file.close()
+        file=open(path, "w")
+        file.write(text)
+        file.close()
+
+    def supprimer_objet(self, nom):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\\Collection\\Objets.xml" 
+        text = ""
+        file = open(path,"r")
+        lines = file.readlines()
+        for line in lines:
+            if line.find("nom=\""+nom+"\"") == -1:
+                text = text + line
+        file.close()
+        file=open(path, "w")
+        file.write(text)
+        file.close()
+
+    def supprimer_sort(self, nom):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\\Collection\\Sorts.xml" 
+        text = ""
+        file = open(path,"r")
+        lines = file.readlines()
+        for line in lines:
+            if line.find("nom=\""+nom+"\"") == -1:
+                text = text + line
+        file.close()
+        file=open(path, "w")
+        file.write(text)
+        file.close()
+
+    def supprimer_competence(self, nom):
+        path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\\Collection\\Competences.xml" 
+        text = ""
+        file = open(path,"r")
+        lines = file.readlines()
+        for line in lines:
+            if line.find("nom=\""+nom+"\"") == -1:
+                text = text + line
+        file.close()
+        file=open(path, "w")
+        file.write(text)
+        file.close()
+
 
     def lire_sauvegarde(self, nom):
         #TODO: A refaire
@@ -212,9 +284,12 @@ class XML_Transceiver:
 
     def lire_armure(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armures.xml"
+        tab = []
+        if not op.isfile(path):
+            return tab
         tree = ET.parse(path)
         root = tree.getroot()
-        tab = []
+        
         dic = {}
         for armors in root:
            for armor in armors.attrib.keys():
@@ -226,9 +301,12 @@ class XML_Transceiver:
 
     def lire_arme(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Armes.xml"
+        tab = []
+        if not op.isfile(path):
+            return tab
         tree = ET.parse(path)
         root = tree.getroot()
-        tab = []
+        
         dic = {}
         for armors in root:
            for armor in armors.attrib.keys():
@@ -240,9 +318,12 @@ class XML_Transceiver:
 
     def lire_sort(self):
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Sorts.xml"
+        tab=[]
+        if not op.isfile(path):
+            return tab
         tree = ET.parse(path)
         root = tree.getroot()
-        tab = []
+        
         dic = {}
         for armors in root:
            for armor in armors.attrib.keys():
@@ -253,10 +334,12 @@ class XML_Transceiver:
         return tab
 
     def lire_competance(self):
+        tab = []
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Competances.xml"
+        if not op.isfile(path):
+            return tab
         tree = ET.parse(path)
         root = tree.getroot()
-        tab = []
         dic = {}
         for armors in root:
            for armor in armors.attrib.keys():
@@ -267,7 +350,10 @@ class XML_Transceiver:
         return tab
     
     def lire_objet(self):
+        tab = []
         path = "C:\Application\Elyneum\Elyneum\Systeme\\"+self.systeme+"\Collection\Objets.xml"
+        if not op.isfile(path):
+            return tab
         tree = ET.parse(path)
         root = tree.getroot()
         tab = []
@@ -357,8 +443,8 @@ class XML_Transceiver:
             isfirst = False
             line = line + car
         for car in personnage.attrib.keys():
-            line =line +", "+ car
-        line = line + "):"
+            line =line +", "+ car + "=\"\""
+        line = line + "getModel=False):"
         line = line + "\n\t\tself.systeme = \""+root.tag+"\""
         line = line + "\n\t\tself.desc = {"
         isfirst = True
@@ -370,7 +456,7 @@ class XML_Transceiver:
             "\n\n\tdef set"+name.capitalize()+"(self,val):\n\t\tself." + name + " = val"
         line = line + "\n\t\t}"   
         line = line + line2
-        
+        line = line + "\n\t\tif getModel: return None"
         for name in personnage.attrib.keys():
             line = line + "\n\t\tself.desc[\""+name+"\"] = " + name
 

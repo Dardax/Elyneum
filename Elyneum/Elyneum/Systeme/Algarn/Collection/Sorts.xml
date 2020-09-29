@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Sorts>
-	<Sort nom="boule de feu" cout="3">fait des boom</Sort>
+	<Sort nom="boule de feu" cout="5">bruule</Sort>
+	<Sort nom="Slascj" cout="6">coupe</Sort>
 </Sorts>

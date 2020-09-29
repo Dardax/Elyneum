@@ -12,8 +12,8 @@ class MainPage(object):
         self.presenter=Presenter(self.callback)
         
         self.window= Tk()
-        self.window.title("Titre")
-        self.window.geometry("1920x600")
+        self.window.title("Elyneum")
+        self.window.geometry("1366x768")
         self.window.rowconfigure(0,weight = 1)
         self.window.rowconfigure(1,weight = 9)
         self.window.columnconfigure(0,weight=1)
@@ -45,6 +45,7 @@ class MainPage(object):
         self.actualFrame.place_forget()    
         self.collectionFrame.place(x=0,y=80)
         self.actualFrame = self.collectionFrame
+        
 
     def switchToCombat(self):
         if self.actualFrame ==self.combatFrame: return
@@ -55,16 +56,22 @@ class MainPage(object):
     def callback(self,com,retour):
         if com=="READ_COL_PERSOS":
             self.collectionFrame.updatePerso(retour)
+            self.collectionFrame.refresh_frame()
         elif com=="READ_COL_ARMES": 
             self.collectionFrame.updateItem(retour,"ARME")
+            self.collectionFrame.refresh_frame()
         elif com=="READ_COL_ARMURES": 
             self.collectionFrame.updateItem(retour,"ARMURE")
+            self.collectionFrame.refresh_frame()
         elif com=="READ_COL_OBJETS":
             self.collectionFrame.updateItem(retour,"OBJET")
+            self.collectionFrame.refresh_frame()
         elif com=="READ_COL_COMPETANCES": 
             self.collectionFrame.updateItem(retour,"COMPETANCE")
+            self.collectionFrame.refresh_frame()
         elif com=="READ_COL_SORTS": 
             self.collectionFrame.updateItem(retour,"SORT")
+            self.collectionFrame.refresh_frame()
     
 
 MainPage()
