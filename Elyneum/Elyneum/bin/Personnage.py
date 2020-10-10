@@ -68,9 +68,7 @@ class Personnage(object):
 		self.sorts = []
 		self.equipements = []
 		self.inventaire = []
-		if getmodel:
-			return None
-
+		if getmodel: return None
 		self.desc["nom"] = nom
 		self.desc["race"] = race
 		self.desc["niveau"] = niveau

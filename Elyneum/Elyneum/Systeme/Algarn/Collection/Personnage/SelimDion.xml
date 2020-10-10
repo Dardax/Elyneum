@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Personnage nom="SelimDion" race="Humain" niveau="1" age="25">
+	<Carac_Principal>
+		<Carac nom_long="Force" nom_court="FOR">35</Carac>
+		<Carac nom_long="Agilité" nom_court="AGI">68</Carac>
+		<Carac nom_long="Intelligence" nom_court="INT">34</Carac>
+		<Carac nom_long="Charisme" nom_court="CHA">74</Carac>
+		<Carac nom_long="Perseption" nom_court="PER">43</Carac>
+	</Carac_Principal>
+	<Carac_Secondaire>
+		<Carac nom_long="Point de vie" nom_court="PV">11</Carac>
+		<Carac nom_long="Point de mana" nom_court="PM">3</Carac>
+		<Carac nom_long="Esquive" nom_court="Esq">34</Carac>
+		<Carac nom_long="Parade" nom_court="Par">6</Carac>
+		<Carac nom_long="Armure" nom_court="Arm">0</Carac>
+	</Carac_Secondaire>
+	<Competances>
+	</Competances>
+	<Sorts>
+	</Sorts>
+	<Equipements>
+	</Equipements>
+	<Inventaire>
+	</Inventaire>
+</Personnage>

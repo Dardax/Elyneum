@@ -10,20 +10,36 @@ class Partie(object):
         self.collection= Collection("Algarn")
         self.transceiver = Transceiver("Algarn")
         self.nom = nom
-        self.combats = []
+        self.actualCbt = None
+        self.listCbts = []
 
     def sauvegarder(self):
         self.transceiver.sauvegarder(self)
 
     def create_combat(self,nom):
-        self.combats.append(Combat())
-        self.combats[-1].rename(nom)
+        cbt = Combat()
+        cbt.rename(nom)
+        self.listCbts.append(cbt)
 
     def addCombat(self,combat):
-        self.combats.append(combat)
+        self.listCbts.append(combat)
 
     def getNom(self):
         return self.nom
 
     def getCombats(self):
-        return self.combats
+        return self.listCbts
+
+    def setActualCbt(self, cbtName):
+        for cbt in self.listCbts:
+            if cbt.nom == cbtName:
+                self.actualCbt = cbt
+                print("set actual cbt : " + cbt.nom)
+
+    def addCharToCbt(self, charName):
+        if self.actualCbt != None :
+            for perso in self.collection.personnages:
+                if perso.desc["nom"] == charName:
+                    self.actualCbt.addPlayer(perso)
+                    print("Ajouter " + charName + " into " + self.actualCbt.nom)
+                    return

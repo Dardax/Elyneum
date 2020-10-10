@@ -4,12 +4,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>b98339ab-74ab-45fc-a22a-bcc98713bae2</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>bin\Elyneum.py</StartupFile>
+    <StartupFile>IHM\Launcher.py</StartupFile>
     <SearchPath>..\Elyneum;bin;IHM;pres</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Elyneum</Name>
     <RootNamespace>Elyneum</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,7 +24,6 @@
     <Compile Include="bin\module1.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="bin\Personnage.py" />
     <Compile Include="bin\Transceiver.py">
       <SubType>Code</SubType>
     </Compile>
@@ -62,6 +62,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IHM\module1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IHM\IHMPersoCbt.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="pres\Presenter.py">

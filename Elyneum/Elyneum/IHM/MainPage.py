@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from IHMCollection import Collection
 from IHMCombat import Combat
-from Presenter import Presenter,queue
+from Presenter import Presenter, queue
 
 class MainPage(object):
     """description of class"""
@@ -18,7 +18,7 @@ class MainPage(object):
         self.window.rowconfigure(1,weight = 9)
         self.window.columnconfigure(0,weight=1)
         self.collectionFrame = Collection(self.window)
-        self.combatFrame = Combat(self.window)
+        self.combatFrame = Combat(self.window,self)
         self.actualFrame = self.combatFrame
 
         self.listOption=Frame(self.window,highlightbackground="black",highlightthickness=1,height=50,width=1920)
@@ -33,11 +33,11 @@ class MainPage(object):
         self.actualFrame.place(x=0,y=50)
         
         self.presenter.start()
-        queue.append("LOAD_COLLECTION")
+        queue.append(("LOAD_COLLECTION",None))
         
         
         self.window.mainloop()
-        queue.insert(0,"END")
+        queue.insert(0,("END",None))
         
 
     def switchToCollection(self):
@@ -54,6 +54,7 @@ class MainPage(object):
         self.actualFrame = self.combatFrame
     
     def callback(self,com,retour):
+        print("callback : " + com)
         if com=="READ_COL_PERSOS":
             self.collectionFrame.updatePerso(retour)
             self.collectionFrame.refresh_frame()
@@ -72,6 +73,10 @@ class MainPage(object):
         elif com=="READ_COL_SORTS": 
             self.collectionFrame.updateItem(retour,"SORT")
             self.collectionFrame.refresh_frame()
-    
+        elif com=="UPDT_CBT_LIST":
+            self.combatFrame.updateCbtList(retour)
+        elif com=="LOAD_CBT":
+            self.combatFrame.loadCbt(retour)
+
 
 MainPage()

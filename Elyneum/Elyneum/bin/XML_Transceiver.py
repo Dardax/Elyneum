@@ -411,7 +411,7 @@ class XML_Transceiver:
         
        
         
-        fichier  = open("Personnage.py","w", encoding='utf-8')
+        fichier  = open("..\\bin\\Personnage.py","w", encoding='utf-8')
         line = ENTETE_PYTHON
         line2=""
         
@@ -441,10 +441,10 @@ class XML_Transceiver:
         for car in tab_carac:
             if not isfirst: line =line +", "
             isfirst = False
-            line = line + car
+            line = line + car + "=\"\""
         for car in personnage.attrib.keys():
             line =line +", "+ car + "=\"\""
-        line = line + "getModel=False):"
+        line = line + ",getmodel=False):"
         line = line + "\n\t\tself.systeme = \""+root.tag+"\""
         line = line + "\n\t\tself.desc = {"
         isfirst = True
@@ -456,7 +456,7 @@ class XML_Transceiver:
             "\n\n\tdef set"+name.capitalize()+"(self,val):\n\t\tself." + name + " = val"
         line = line + "\n\t\t}"   
         line = line + line2
-        line = line + "\n\t\tif getModel: return None"
+        line = line + "\n\t\tif getmodel: return None"
         for name in personnage.attrib.keys():
             line = line + "\n\t\tself.desc[\""+name+"\"] = " + name
 

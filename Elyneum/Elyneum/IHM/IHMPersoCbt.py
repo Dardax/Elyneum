@@ -2,7 +2,7 @@
 from tkinter import *
 from tkinter import ttk
 
-class FicheDePerso(object):
+class FicheDePersoCbt(object):
     """Objet de base pour l'IHM des fiches de perso"""
     def __init__(self, parent,perso):
         self.parent = parent
@@ -83,12 +83,17 @@ class FicheDePerso(object):
         self.frame2.place(x=0,y=130)
 
     def pack(self):
-        self.window.pack()
+        self.window.pack(fill=X,side=LEFT)
 
     def grid(self,**kwargs):
         self.window.grid(kwargs)
 
     def place(self,**kwargs):
         self.window.place(kwargs)
+
+    def cget(self,text):
+        if text =="text":
+            print("Understood")
+            return self.nomPersonnage.cget("text")
 
     

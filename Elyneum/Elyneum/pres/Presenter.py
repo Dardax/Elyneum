@@ -20,70 +20,71 @@ class Presenter(Thread):
             
             if len(queue) != 0:
                 commande=queue.pop()
-                if commande=="END":   
+                print("Queue : " + commande[0])
+
+                if commande[0]=="END":   
                     end=True                
 
-                elif commande == "LOAD_COLLECTION":
-                    queue.insert(0,"LOAD_ARMES")
-                    queue.insert(0,"LOAD_ARMURES")
-                    queue.insert(0,"LOAD_COMPETANCES")
-                    queue.insert(0,"LOAD_OBJETS")
-                    queue.insert(0,"LOAD_SORTS")
-                    queue.insert(0,"LOAD_PERSOS")
-                    
+                elif commande[0] == "LOAD_COLLECTION":
+                    queue.insert(0,("LOAD_ARMES",None))
+                    queue.insert(0,("LOAD_ARMURES",None))
+                    queue.insert(0,("LOAD_COMPETANCES",None))
+                    queue.insert(0,("LOAD_OBJETS",None))
+                    queue.insert(0,("LOAD_SORTS",None))
+                    queue.insert(0,("LOAD_PERSOS",None))
 
-                elif commande == "LOAD_ARMES": 
+                elif commande[0] == "LOAD_ARMES": 
                     self.modele.collection.reload_arme()
                     self.callback("READ_COL_ARMES",self.modele.collection.armes)
 
-                elif commande == "LOAD_ARMURES": 
+                elif commande[0] == "LOAD_ARMURES": 
                     self.modele.collection.reload_armure()
                     self.callback("READ_COL_ARMURES",self.modele.collection.armures)
 
-                elif commande == "LOAD_COMPETANCES": 
+                elif commande[0] == "LOAD_COMPETANCES": 
                     self.modele.collection.reload_competances()
                     self.callback("READ_COL_COMPETANCES",self.modele.collection.competances)
 
-                elif commande == "LOAD_OBJETS": 
+                elif commande[0] == "LOAD_OBJETS": 
                     self.modele.collection.reload_objet()
                     self.callback("READ_COL_OBJETS",self.modele.collection.objets)
 
-                elif commande == "LOAD_SORTS": 
+                elif commande[0] == "LOAD_SORTS": 
                     self.modele.collection.reload_sort()
                     self.callback("READ_COL_SORTS",self.modele.collection.sorts)
 
-                elif commande == "LOAD_PERSOS": 
+                elif commande[0] == "LOAD_PERSOS": 
                     self.modele.collection.reload_perso()
                     self.callback("READ_COL_PERSOS",self.modele.collection.personnages)
 
                 elif commande[0] == "SAVE_PERSO": 
                     self.modele.collection.sauver_personnage(commande[1])
-                    queue.insert(0,"LOAD_PERSOS")
+                    queue.insert(0,("LOAD_PERSOS",None))
 
                 elif commande[0] == "SAVE_SORT": 
                     self.modele.collection.sauver_sort(commande[1])
-                    queue.insert(0,"LOAD_SORTS")
+                    queue.insert(0,("LOAD_SORTS",None))
 
                 elif commande[0] == "SAVE_ARME": 
                     self.modele.collection.sauver_arme(commande[1])
                     time.sleep(1)
-                    queue.insert(0,"LOAD_ARMES")
+                    queue.insert(0,("LOAD_ARMES",None))
 
                 elif commande[0] == "SAVE_ARMURE": 
                     self.modele.collection.sauver_armure(commande[1])
-                    queue.insert(0,"LOAD_ARMURES")
+                    queue.insert(0,("LOAD_ARMURES",None))
 
                 elif commande[0] == "SAVE_OBJET": 
                     self.modele.collection.sauver_objet(commande[1])
-                    queue.insert(0,"LOAD_OBJETS")
+                    queue.insert(0,("LOAD_OBJETS",None))
 
                 elif commande[0] == "SAVE_COMPETANCE": 
                     self.modele.collection.sauver_competance(commande[1])
-                    queue.insert(0,"LOAD_COMPETANCES")
+                    queue.insert(0,("LOAD_COMPETANCES",None))
 
                 elif commande[0] == "DELETE_PERSONNAGE": 
                     self.modele.collection.supprimer_personnage(commande[1])
-                    queue.insert(0,"LOAD_PERSOS")
+                    queue.insert(0,("LOAD_PERSOS",None))
                 
                 elif commande[0] == "DELETE_ITEM": 
                     if commande[1] == "ARME":
@@ -97,9 +98,19 @@ class Presenter(Thread):
                     elif commande[1] == "OBJET":
                         self.modele.collection.supprimer_objet(commande[2])
                     
-                    queue.insert(0,"LOAD_COLLECTION")
+                    queue.insert(0,("LOAD_COLLECTION",None))
 
-               
+                elif commande[0]=="ADD_CBT":
+                    self.modele.create_combat(commande[1])
+                    self.callback("UPDT_CBT_LIST",self.modele.getCombats())   
+                    
+                elif commande[0]=="ADD_CHAR_TO_CBT":
+                    self.modele.addCharToCbt(commande[1])
+                    self.callback("LOAD_CBT",self.modele.actualCbt)
+                
+                elif commande[0]=="SWITCH_CBT":
+                    self.modele.setActualCbt(commande[1])
+                    self.callback("LOAD_CBT",self.modele.actualCbt)
                 
                 
             else:
